@@ -7,6 +7,11 @@ invoke the program with python3 with the argument of the file you want to compil
 eg.
 python3 filler.py date.tex
 
+##prereqs
+a directory called archives
+pip install pyyaml
+a latex installation with the necessary fonts and latexmk
+
 ##what are these files?
 ###template.tex
 this is the LaTeX template that the minutes use.
