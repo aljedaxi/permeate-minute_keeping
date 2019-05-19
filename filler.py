@@ -9,6 +9,23 @@ from 	os			import path
 #conf = yaml.load(open('vars.yml').read())
 
 
+def cleanup(title, minutes):
+    """
+        removes all of the files created by LaTeX, then moves the original minutes file into the archives.
+    """
+    call(("rm",
+         f"{title}.aux",
+         f"{title}.fdb_latexmk",
+         f"{title}.fls",
+         f"{title}.log",
+         f"{title}.toc",
+         f"{title}.tex",
+        ))
+
+    call(("mv",
+          minutes,
+          "archives/",))
+
 def rename_texput(outfile):
     call(("mv", "texput.pdf", f"{outfile}.pdf"))
 
@@ -49,16 +66,6 @@ def fill(template_file, outfile, meeting):
     )
 
     call(("latexmk", "--pdf", outfile))
-    title = outfile.split(".")[0]
-    #gets rid of all the garbage
-    call(("rm",
-         f"{title}.aux",
-         f"{title}.fdb_latexmk",
-         f"{title}.fls",
-         f"{title}.log",
-         f"{title}.toc",
-         f"{title}.tex",
-        ))
 
 if __name__ == "__main__":
     from sys import argv
@@ -77,4 +84,6 @@ if __name__ == "__main__":
         template_file = TEMPLATE
         meeting = open(minutes).read()
         outfile = f"""{minutes.split(".")[0]}_n.tex"""
+        title = outfile.split(".")[0]
         fill(template_file, outfile, meeting)
+        cleanup(title, minutes)
