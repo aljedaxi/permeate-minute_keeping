@@ -78,10 +78,15 @@ if __name__ == "__main__":
 
     particular = argv[1::]
     TEMPLATE = "template.tex"
+    ZINE_TEMPLATE = "zine_template.tex"
 
     #for each argument
     for minutes in particular:
-        template_file = TEMPLATE
+        if "z" in particular:
+            template_file = ZINE_TEMPLATE
+        else:
+            template_file = TEMPLATE
+
         meeting = open(minutes).read()
         outfile = f"""{minutes.split(".")[0]}_n.tex"""
         title = outfile.split(".")[0]
