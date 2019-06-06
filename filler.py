@@ -7,6 +7,8 @@ from 	os			import path
 #template_file = ""
 
 #conf = yaml.load(open('vars.yml').read())
+"""
+"""
 
 
 def cleanup(title, minutes):
